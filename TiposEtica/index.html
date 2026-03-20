@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de Ética Aplicada - Módulo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0f1d;
+            --glass: rgba(255, 255, 255, 0.03);
+            --accent: #38bdf8; /* Azul cyan moderno */
+            --text-white: #f1f5f9;
+            --text-gray: #94a3b8;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --modal-bg: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(56, 189, 248, 0.12) 0px, transparent 40%),
+                radial-gradient(at 90% 90%, rgba(56, 189, 248, 0.08) 0px, transparent 40%);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            max-width: 800px;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            line-height: 1.2;
+            background: linear-gradient(to bottom, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-gray);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Contenedor Grid Responsivo */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Estilo de las 7 Tarjetas-Botones */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto de brillo al pasar el cursor */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(56, 189, 248, 0.1);
+        }
+
+        .card:hover::after { opacity: 1; }
+
+        /* Icono decorativo sutil */
+        .card-icon {
+            font-size: 1.2rem;
+            color: var(--border-glass);
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .card:hover .card-icon { color: var(--accent); }
+
+        .card h2 { 
+            color: #fff; 
+            font-size: 1.3rem; 
+            font-weight: 600; 
+            line-height: 1.3;
+        }
+
+        /* Estilos del Modal (Ventana Emergente) */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-content {
+            background: var(--modal-bg);
+            width: 100%;
+            max-width: 650px;
+            max-height: 85vh;
+            border-radius: 28px;
+            border: 1px solid var(--border-glass);
+            padding: 3rem;
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+            animation: modalEntry 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes modalEntry {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Botón Cerrar */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            color: var(--text-gray);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1.2rem;
+        }
+
+        .close-btn:hover { background: #ef4444; color: white; }
+
+        /* Contenido del Modal */
+        .modal-body h2 { 
+            color: var(--accent); 
+            margin-bottom: 1.5rem; 
+            font-size: 1.8rem; 
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        .modal-body p { 
+            line-height: 1.8; 
+            color: #cbd5e1; 
+            font-size: 1.05rem;
+        }
+
+        /* Scrollbar del Modal */
+        .modal-content::-webkit-scrollbar { width: 6px; }
+        .modal-content::-webkit-scrollbar-thumb { background: var(--border-glass); border-radius: 10px; }
+
+        /* Media Queries para ajuste fino en móviles */
+        @media (max-width: 600px) {
+            body { padding: 2rem 1rem; }
+            h1 { font-size: 1.8rem; }
+            .modal-content { padding: 2rem; border-radius: 20px; }
+            .modal-body h2 { font-size: 1.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Tipos de Ética Aplicada</h1>
+    <p class="subtitle">Selecciona una categoría para ver su definición completa</p>
+
+    <div class="grid-container">
+        <div class="card" onclick="openModal('profesional')">
+            <div class="card-icon">01</div>
+            <h2>Ética profesional</h2>
+        </div>
+
+        <div class="card" onclick="openModal('militar')">
+            <div class="card-icon">02</div>
+            <h2>Ética militar</h2>
+        </div>
+
+        <div class="card" onclick="openModal('economica')">
+            <div class="card-icon">03</div>
+            <h2>Ética económica</h2>
+        </div>
+
+        <div class="card" onclick="openModal('religiosa')">
+            <div class="card-icon">04</div>
+            <h2>Ética religiosa</h2>
+        </div>
+
+        <div class="card" onclick="openModal('ambiental')">
+            <div class="card-icon">05</div>
+            <h2>Ética ambiental</h2>
+        </div>
+
+        <div class="card" onclick="openModal('bioetica')">
+            <div class="card-icon">06</div>
+            <h2>Bioética</h2>
+        </div>
+
+        <div class="card" onclick="openModal('social')">
+            <div class="card-icon">07</div>
+            <h2>Ética social</h2>
+        </div>
+    </div>
+
+    <div id="modalOverlay" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">✕</button>
+            <div id="modalContentArea" class="modal-body">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Base de datos con la información EXACTA proporcionada
+        const dataetica = {
+            profesional: {
+                title: "Ética profesional",
+                text: "Es la ética que concierne al ejercicio de una profesión. Por ejemplo: ética médica o ética psicológica."
+            },
+            militar: {
+                title: "Ética militar",
+                text: "Es la ética que tiene que ver con el uso de las fuerzas bélicas, especialmente en épocas de guerra o de conflicto."
+            },
+            economica: {
+                title: "Ética económica",
+                text: "Es la ética vinculada con la economía, el comercio y las finanzas, y que se hace preguntas respecto a cómo está bien y cómo está mal hacer dinero."
+            },
+            religiosa: {
+                title: "Ética religiosa",
+                text: "Es la ética que se desprende de una religión organizada y que sigue una tradición moral y cultural específica. Por ejemplo: La ética cristiana, islámica o judía."
+            },
+            ambiental: {
+                title: "Ética ambiental",
+                text: "Es la ética vinculada con el ser humano y la relación que establece con el entorno natural que lo rodea."
+            },
+            bioetica: {
+                title: "Bioética",
+                text: "Es la ética que reflexiona sobre los conflictos éticos que surgen conforme el desarrollo y avance de la ciencia y la tecnología en el área de la medicina."
+            },
+            social: {
+                title: "Ética social",
+                text: "Es la ética vinculada a las relaciones entre los individuos y las consecuencias sociales de sus actos (Álvarez, 2023)."
+            }
+        };
+
+        const modal = document.getElementById('modalOverlay');
+        const contentArea = document.getElementById('modalContentArea');
+
+        function openModal(key) {
+            const item = dataetica[key];
+            contentArea.innerHTML = `<h2>${item.title}</h2><p>${item.text}</p>`;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Deshabilitar scroll del fondo
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = ''; // Restaurar scroll
+        }
+
+        // Cerrar si se hace clic fuera del contenido blanco
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Cerrar con la tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && modal.style.display === 'flex') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
