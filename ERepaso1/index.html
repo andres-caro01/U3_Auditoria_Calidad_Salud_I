@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de Repaso 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --primary: #004F67;
+            --primary-dark: #00779A;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #004F67;
+            background-color: #f0f5f5;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        #main-container {
+            width: 95%;
+            max-width: 1000px;
+            height: 850px; 
+            background: white;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 3rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) #f1f1f1;
+        }
+
+        .text-custom { color: var(--primary); }
+        .bg-custom { background-color: var(--primary); }
+
+        .btn-action {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 3.5rem;
+            border-radius: 99px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+        .btn-action:hover:not(:disabled) {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .option-card {
+            transition: all 0.2s ease;
+            border: 2px solid #f1f5f9;
+        }
+        
+        .option-card.selected {
+            border-color: var(--primary);
+            background-color: #f0fdfa;
+        }
+
+        .option-card.locked {
+            pointer-events: none;
+        }
+
+        .circle-bar { 
+            fill: none; 
+            stroke: var(--primary); 
+            stroke-width: 10; 
+            stroke-linecap: round; 
+            transition: stroke-dashoffset 1.5s ease-out;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div id="main-container">
+        
+        <div id="screen-start" class="scroll-content flex flex-col items-center justify-center text-center animate__animated animate__fadeIn">
+            <h1 class="text-5xl font-bold text-custom mb-6 leading-tight">Ejercicio de Repaso 1</h1>
+            <p class="mb-4 text-slate-600 font-semibold">Estudios de Caso: Bioética, Ética y Moral</p>
+            <p class="mb-12 max-w-2xl text-slate-500 text-xl">¡Bienvenido/a al ejercicio de repaso numero 1!</p>
+            <button onclick="startQuiz()" class="btn-action text-xl shadow-lg">INICIAR</button>
+        </div>
+
+        <div id="screen-quiz" class="hidden flex flex-col h-full">
+            <div class="px-14 pt-10 flex justify-between items-center bg-white z-10">
+                <span id="q-number" class="font-bold text-custom text-sm tracking-widest uppercase"></span>
+                <div class="w-48 h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div id="progress-fill" class="h-full bg-custom transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="scroll-content">
+                <p id="q-instruction" class="text-custom font-bold italic mb-4 text-base leading-relaxed text-slate-600">
+                    Estimado estudiante a continuación usted encontrará cuatro ejemplos de bioética, ética y moral en dónde debe analizar y responder en cada caso qué principios de los anteriormente expuestos, se están afectando.
+                </p>
+                <h2 id="q-text" class="text-lg font-medium mb-6 leading-snug text-slate-800 border-l-4 border-custom pl-4 py-2 bg-slate-50"></h2>
+
+                <div id="options-container" class="space-y-3"></div>
+
+                <div id="feedback-box" class="hidden mt-6 p-6 rounded-3xl border-2 animate__animated animate__fadeInUp">
+                    <p id="feedback-title" class="font-bold text-xl mb-2"></p>
+                    <div id="feedback-body" class="text-base leading-relaxed text-slate-700"></div>
+                    <button onclick="nextStep()" class="mt-4 bg-slate-800 text-white px-10 py-2 rounded-xl hover:bg-black transition-all font-bold">Continuar</button>
+                </div>
+
+                <button id="btn-validate" onclick="validateAnswer()" class="btn-action w-full mt-8 shadow-xl text-lg">Validar Respuesta</button>
+            </div>
+        </div>
+
+        <div id="screen-results" class="hidden scroll-content flex flex-col items-center justify-center text-center">
+            <h2 class="text-4xl font-bold mb-4">Resultado Final</h2>
+            <div class="relative flex items-center justify-center my-6">
+                <svg class="w-64 h-64 -rotate-90">
+                    <circle cx="128" cy="128" r="110" stroke="#f1f5f9" stroke-width="10" fill="none"></circle>
+                    <circle id="final-circle" cx="128" cy="128" r="110" class="circle-bar" stroke-dasharray="691" stroke-dashoffset="691"></circle>
+                </svg>
+                <div class="absolute text-6xl font-black text-slate-800"><span id="result-percent">0</span>%</div>
+            </div>
+            <p id="result-score" class="text-2xl font-bold mb-4 text-slate-700"></p>
+            <div id="result-msg" class="max-w-2xl mb-8 p-6 bg-slate-50 rounded-3xl italic text-slate-600"></div>
+            <button onclick="location.reload()" class="btn-action">Intentar de nuevo</button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "La ética interviene en numerosos debates contemporáneos, por ejemplo: La legalización del aborto. Distintos actores sociales en Occidente piden una legislación en materia de aborto, que permita una práctica normada, legal, sanitaria y responsable. Esta postura considera al aborto como una práctica que ocurre con regularidad, pero clandestinamente y que a menudo lleva a problemas de salud e incluso a muertes cuando quienes lo practican no cuentan con la debida atención sanitaria. Por otro lado, quienes piden que no se legalice sostienen que todo aborto termina con las posibilidades de nacer y vivir del ser humano engendrado. En el anterior ejemplo si se practicará el aborto sin justa causa a una mujer del estado colombiano, los principios se afectarían, bioéticos son:",
+                options: [
+                    {t: "Beneficencia, no maleficencia y justicia.", c: true},
+                    {t: "Justicia, autonomía, beneficencia.", c: false},
+                    {t: "Ética, responsabilidad y justicia.", c: false},
+                    {t: "Justicia, Autonomía, responsabilidad.", c: false}
+                ],
+                feedback: "Los principios de bioética que se están afectando son: beneficencia, no maleficencia y justicia, los cuales son pilares fundamentales para la práctica médica y de investigación, establecidos principalmente por Beauchamp y Childress. Buscan asegurar el bienestar, evitar el daño físico/psicológico y garantizar una distribución equitativa de recursos y cuidados en el ser humano."
+            },
+            {
+                question: "El consumo de carne animal. Mientras una parte de la población se alimenta de productos provenientes de los animales, distintos actores sociales están en contra de esta práctica, ya que defienden los derechos de la vida animal. La discusión no es solo si es ético consumir carne animal, sino también la defensa de los derechos animales. Si usted no está de acuerdo con el sacrificio de algunos animales, que principios éticos se verían afectados marque el correcto según lo visto en la Unidad tres:",
+                options: [
+                    {t: "Beneficencia, ética, responsabilidad, justicia.", c: false},
+                    {t: "Respeto por un ser vivo, libertad, responsabilidad, justicia.", c: true},
+                    {t: "Responsabilidad, moral, ética, beneficencia.", c: false},
+                    {t: "Libertad, ética, responsabilidad, justicia.", c: false}
+                ],
+                feedback: "En el anterior caso se afectan los principios éticos de la respuesta b. porque estos son principios fundamentales que conforman la base ética para una convivencia armoniosa y sostenible, promoviendo el reconocimiento de la dignidad, la autonomía individual, la rendición de cuentas y la equidad. Implican valorar la vida, actuar con responsabilidad moral y asegurar el trato justo hacia los demás seres vivos y la naturaleza."
+            },
+            {
+                question: "La manipulación genética. Con el correr de las últimas décadas, la ciencia estudió la forma en que se construye el ADN Esto permite realizar modificaciones no solo para eliminar taras congénitas, enfermedades y dolencias, sino también para elegir el color de los ojos, la contextura, el sexo y otros rasgos fundamentales del funcionamiento bioquímico del cuerpo humano. Hasta qué punto es ético intervenir en el genoma de la especie es una pregunta todavía vigente y controversial en las discusiones éticas contemporáneas, que principio bioético cree usted que se vería afectado:",
+                options: [
+                    {t: "Beneficencia, no maleficencia.", c: true},
+                    {t: "Justicia, respeto.", c: false},
+                    {t: "Moral, responsabilidad.", c: false},
+                    {t: "Respeto, beneficencia.", c: false}
+                ],
+                feedback: "La beneficencia y la no maleficencia son pilares fundamentales de la bioética. La no maleficencia («primero, no hacer daño») exige evitar acciones que perjudiquen al paciente, mientras que la beneficencia obliga a actuar positivamente para promover el bienestar y prevenir o eliminar daños. Ambos principios buscan el máximo beneficio con el mínimo riesgo, pero acá se están afectando los dos porque no se sabe si este proceso genere un bien en el ser humano."
+            },
+            {
+                question: "La eutanasia. La interrupción de la vida de un individuo que padece alguna enfermedad, sin perspectiva de cura, es motivo de dilema ético. Por un lado, los defensores de esta práctica sostienen el derecho de poner fin a su vida del individuo que padece las consecuencias de una enfermedad o patología. Por otro lado, los detractores de esta práctica están en contra por causas religiosas (sostienen que el cese voluntario de la vida va en contra de los deseos de Dios) o porque la entienden contraria al juramento hipocrático. Qué principios bioéticos se verían afectados:",
+                options: [
+                    {t: "Responsabilidad, justicia, respeto, moral.", c: false},
+                    {t: "Justicia, ética, honestidad, autonomía.", c: false},
+                    {t: "Autonomía, Beneficencia, no maleficencia, justicia.", c: true},
+                    {t: "Beneficencia, justicia, responsabilidad, moral.", c: false}
+                ],
+                feedback: "Estos principios deben aplicarse de forma conjunta, aunque pueden entrar en conflicto y requerir jerarquización según el caso, hay que revisar el estado de conciencia de la persona y los principios éticos del profesional de la salud."
+            }
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+
+        function startQuiz() {
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-quiz').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = quizData[currentIdx];
+            document.getElementById('q-number').innerText = `CASO ${currentIdx + 1}/${quizData.length}`;
+            document.getElementById('progress-fill').style.width = `${((currentIdx + 1)/quizData.length)*100}%`;
+            document.getElementById('q-text').innerText = q.question;
+            document.getElementById('feedback-box').classList.add('hidden');
+            document.getElementById('btn-validate').classList.remove('hidden');
+            
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            q.options.forEach((opt, i) => {
+                const d = document.createElement('div');
+                d.className = "option-card flex items-center p-4 rounded-2xl cursor-pointer hover:bg-slate-50";
+                d.innerHTML = `
+                    <input type="radio" name="ans" id="o${i}" value="${i}" class="w-5 h-5 accent-[#004F67]">
+                    <label for="o${i}" class="ml-4 w-full cursor-pointer font-medium text-lg text-slate-700">${opt.t}</label>
+                `;
+                d.onclick = () => {
+                    if (d.classList.contains('locked')) return;
+                    document.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
+                    d.classList.add('selected');
+                    d.querySelector('input').checked = true;
+                };
+                container.appendChild(d);
+            });
+        }
+
+        function validateAnswer() {
+            const q = quizData[currentIdx];
+            const sel = document.querySelector('input[name="ans"]:checked');
+            
+            if(!sel) return;
+
+            document.querySelectorAll('.option-card').forEach(el => el.classList.add('locked'));
+            
+            const isCorrect = q.options[sel.value].c;
+            if(isCorrect) score++;
+            
+            const fBox = document.getElementById('feedback-box');
+            fBox.classList.remove('hidden', 'bg-green-50', 'border-green-200', 'bg-red-50', 'border-red-200');
+            document.getElementById('btn-validate').classList.add('hidden');
+
+            const fTitle = document.getElementById('feedback-title');
+            if(isCorrect) {
+                fTitle.innerText = "¡Correcto!";
+                fTitle.className = "font-bold text-xl text-green-700 mb-1";
+                fBox.classList.add('bg-green-50', 'border-green-200');
+            } else {
+                fTitle.innerText = "Incorrecto";
+                fTitle.className = "font-bold text-xl text-red-700 mb-1";
+                fBox.classList.add('bg-red-50', 'border-red-200');
+            }
+            
+            document.getElementById('feedback-body').innerHTML = `<strong>Realimentación:</strong> ${q.feedback}`;
+        }
+
+        function nextStep() {
+            currentIdx++;
+            if(currentIdx < quizData.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('screen-quiz').classList.add('hidden');
+            document.getElementById('screen-results').classList.remove('hidden');
+            
+            const percent = Math.round((score / quizData.length) * 100);
+            const circle = document.getElementById('final-circle');
+            const circumference = 691;
+            
+            setTimeout(() => {
+                const offset = circumference - (percent / 100) * circumference;
+                circle.style.strokeDashoffset = offset;
+                
+                let count = 0;
+                const timer = setInterval(() => {
+                    if(count >= percent) {
+                        document.getElementById('result-percent').innerText = percent;
+                        clearInterval(timer);
+                    } else {
+                        count++;
+                        document.getElementById('result-percent').innerText = count;
+                    }
+                }, 15);
+            }, 300);
+
+            document.getElementById('result-score').innerText = `Puntaje: ${score} de ${quizData.length}`;
+            const msg = document.getElementById('result-msg');
+            
+            if(percent === 100) msg.innerHTML = "¡Excelente! Has analizado correctamente todos los dilemas éticos y bioéticos.";
+            else if(percent >= 70) msg.innerHTML = "¡Buen trabajo! Tienes una buena comprensión de los principios éticos.";
+            else msg.innerHTML = "Te recomendamos repasar los principios de la Unidad 3 y los pilares de la bioética de Beauchamp y Childress.";
+        }
+    </script>
+</body>
+</html>
