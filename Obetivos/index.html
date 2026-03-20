@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Educativo - Auditoría de Calidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #00f2ff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.15);
+            --bg: #050a15;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #111827 0%, #050a15 100%);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .instruccion {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-size: 13px;
+            color: #cbd5e1;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 6px 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            z-index: 50;
+        }
+
+        .grid-container {
+            display: grid;
+            gap: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 1024px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+
+        .card {
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 3/4;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%) brightness(0.6);
+            transition: 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.25);
+        }
+
+        .card:hover img {
+            filter: grayscale(0%) brightness(0.85);
+            transform: scale(1.05);
+        }
+
+        .card-title-box {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 20px 10px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.95) 70%);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 35px;
+            border-radius: 25px;
+            max-width: 550px;
+            width: 100%;
+            animation: pop 0.4s ease-out;
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .list-item {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            list-style: none;
+            font-size: 0.95em;
+        }
+
+        .close-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: var(--accent);
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p class="instruccion">Haga clic sobre las tarjetas para ampliar la información.</p>
+
+    <div class="grid-container">
+        <div class="card"
+            onclick="playClick(); openModal('Conocimientos previos', 'Para el desarrollo de la unidad tres, es necesario que el estudiante haya cursado y aprobado las unidades uno y dos de la asignatura Auditoria de la Calidad en Salud I. De igual forma, se requiere que cuente con conocimientos en:', ['Sistema Obligatorio de Garantía de la Calidad en Salud.', 'Epidemiología.', 'Salud pública.', 'Sicología organizacional.', 'Talento humano en salud.'])">
+            <img src="https://images.unsplash.com/photo-1587876931567-564ce588bfbd?q=80&w=1170&auto=format&fit=crop"
+                alt="Conocimientos">
+            <div class="card-title-box">
+                <h3 class="card-title">Conocimientos previos</h3>
+            </div>
+        </div>
+
+
+        <div class="card"
+            onclick="playClick(); openModal('Objetivos', 'La ética en la auditoría de salud busca garantizar una atención de calidad, promoviendo la integridad, imparcialidad y confidencialidad en el auditor, con objetivos de mejorar procesos y proteger al paciente, resultando en competencias como el análisis crítico de dilemas bioéticos, la aplicación de principios deontológicos y la generación de recomendaciones constructivas para la mejora continua, todo enfocado en el bienestar del paciente y el buen gobierno sanitario, buscando resultados de aprendizaje con el estudiante como: Identificación de áreas de mejora: para detectar riesgos y problemas éticos en la atención, permitiendo que el estudiante presente propuestas de solución que permitan  formular recomendaciones para implementar cambios normativos, formativos o sistémicos.', ['A la vez incentivando la mejora de la cultura ética: Para contribuir en un ambiente de trabajo más íntegro y centrado en el paciente. Aumento de la calidad: Aportar directamente a la mejora continua de los servicios de salud, y fomentar la resolución de conflictos: para manejar de manera constructiva dilemas y angustias morales que ayuden a mejorar la cultura de la prevención del riesgo en la prestación de los servicios de salud.'])">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=500"
+                alt="Objetivos">
+            <div class="card-title-box">
+                <h3 class="card-title">Objetivos</h3>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal-content">
+                <h2 id="mTitle"
+                    style="color: var(--accent); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                </h2>
+                <p id="mDesc" style="color: #cbd5e1; line-height: 1.5;"></p>
+                <ul id="mList" style="padding: 0;"></ul>
+                <button class="close-btn" onclick="closeModal()">Continuar</button>
+            </div>
+        </div>
+
+        <script>
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            function playClick() {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.frequency.setValueAtTime(700, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+            }
+
+            function openModal(t, d, items) {
+                document.getElementById('mTitle').innerText = t;
+                document.getElementById('mDesc').innerText = d;
+                const list = document.getElementById('mList');
+                list.innerHTML = '';
+
+                if (items.length > 0) {
+                    items.forEach(i => {
+                        const li = document.createElement('li');
+                        li.className = "list-item";
+                        li.innerText = "✦ " + i;
+                        list.appendChild(li);
+                    });
+                }
+
+                document.getElementById('modalOverlay').classList.add('active');
+            }
+
+            function closeModal() {
+                document.getElementById('modalOverlay').classList.remove('active');
+            }
+        </script>
+</body>
+
+</html>
