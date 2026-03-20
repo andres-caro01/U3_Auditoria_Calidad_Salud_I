@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudios Éticos - Módulo Educativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent-color: #38bdf8;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* Tarjetas Estilo Botón */
+        .card-button {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-button:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 40px rgba(56, 189, 248, 0.2);
+        }
+
+        .card-button h2 {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .card-button p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        /* Ventana Emergente (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            border: 1px solid var(--glass-border);
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 24px;
+            position: relative;
+            padding: 2.5rem;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease-out;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--text-dim);
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: white;
+        }
+
+        .modal-body h2 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--card-bg);
+            padding-bottom: 10px;
+        }
+
+        .modal-body p {
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+            color: #cbd5e1;
+        }
+
+        .modal-body ul {
+            list-style: none;
+        }
+
+        .modal-body ul li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .modal-body ul li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .modal-body strong {
+            color: white;
+        }
+
+        /* Scrollbar Personalizado */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--glass-border);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Los estudios éticos se dividen en tres ramas principales</h1>
+
+    <div class="container">
+        <div class="card-button" onclick="openModal('metaetica')">
+            <h2>La metaética</h2>
+            <p>Clic para ver detalles</p>
+        </div>
+
+        <div class="card-button" onclick="openModal('normativa')">
+            <h2>La ética normativa</h2>
+            <p>Clic para ver detalles</p>
+        </div>
+
+        <div class="card-button" onclick="openModal('aplicada')">
+            <h2>La ética aplicada</h2>
+            <p>Clic para ver detalles</p>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalBody" class="modal-body">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const info = {
+            metaetica: {
+                titulo: "La metaética",
+                contenido: "<p>Estudia la naturaleza, origen y significado de los conceptos éticos básicos. Por ejemplo, la pregunta por la felicidad.</p>"
+            },
+            normativa: {
+                titulo: "La ética normativa",
+                contenido: "<p>Estudia e interpreta los principios que rigen a los sistemas que regulan la conducta humana. Por ejemplo, los códigos civiles.</p>"
+            },
+            aplicada: {
+                titulo: "La ética aplicada",
+                contenido: `
+                    <p>Estudia e interpreta casos y controversias éticas específicas de la vida real. Por ejemplo, la ética de una profesión determinada (Mejía, 2024).</p>
+                    <h3>Tipos de ética aplicada</h3>
+                    <p>La ética se aplica en todos aquellos campos de la vida en los que aparece la posibilidad de elevar un juicio o dilema moral. La ética aplicada se clasifica según el ámbito en el que se desarrolle, y puede ser:</p>
+                    <ul>
+                        <li><strong>Ética profesional.</strong> Es la ética que concierne al ejercicio de una profesión. Por ejemplo: ética médica o ética psicológica.</li>
+                        <li><strong>Ética militar.</strong> Es la ética que tiene que ver con el uso de las fuerzas bélicas, especialmente en épocas de guerra o de conflicto.</li>
+                        <li><strong>Ética económica.</strong> Es la ética vinculada con la economía, el comercio y las finanzas.</li>
+                        <li><strong>Ética religiosa.</strong> Es la ética que se desprende de una religión organizada y que sigue una tradición moral y cultural específica.</li>
+                        <li><strong>Ética ambiental.</strong> Es la ética vinculada con el ser humano y la relación que establece con el entorno natural.</li>
+                        <li><strong>Bioética.</strong> Es la ética que reflexiona sobre los conflictos éticos que surgen conforme el desarrollo y avance de la ciencia y la tecnología en el área de la medicina.</li>
+                        <li><strong>Ética social.</strong> Es la ética vinculada a las relaciones entre los individuos y las consecuencias sociales de sus actos (Álvarez, 2023).</li>
+                    </ul>
+                `
+            }
+        };
+
+        function openModal(key) {
+            const modal = document.getElementById('infoModal');
+            const body = document.getElementById('modalBody');
+            body.innerHTML = `<h2>${info[key].titulo}</h2>${info[key].contenido}`;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('infoModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+
+</html>
