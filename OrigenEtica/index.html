@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia de la Ética - Animación Magnífica</title>
+    <style>
+        /* --- ESTILOS BASE Y FONDO --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Fondo azul petróleo profundo de la imagen original */
+            background-color: #2b677a; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Evita barras de desplazamiento durante la animación */
+            color: white;
+        }
+
+        /* Contenedor principal de la infografía */
+        .infografia-container {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            height: 400px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+        }
+
+        /* --- LA LÍNEA CURVA (EL CAMINO) --- */
+        /* Recreamos la línea usando pseudo-elementos para que se pueda animar el "dibujado" */
+        .linea-camino {
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            /* El mismo color turquesa brillante de la línea original */
+            background-color: #00bcd4; 
+            transform: translateY(-50%);
+            border-radius: 2px;
+            
+            /* Animación de "dibujado" de izquierda a derecha */
+            transform-origin: left center;
+            scale: 0 1; /* Empieza con ancho cero */
+            animation: dibujarLinea 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+            animation-delay: 0.2s; /* Pequeño retraso inicial */
+            box-shadow: 0 0 15px rgba(0, 230, 246, 0.5); /* Efecto de brillo sutil */
+        }
+
+        /* Puntos decorativos en los extremos */
+        .linea-camino::before, .linea-camino::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #00bcd4;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 10px rgba(0, 230, 246, 0.8);
+        }
+        .linea-camino::before { left: -6px; } /* Punto de inicio */
+        .linea-camino::after { right: -6px; } /* Punto final (la flecha se puede simular después si se desea) */
+
+        /* --- BLOQUES DE TEXTO (ESTACIONES) --- */
+        .estacion {
+            position: relative;
+            width: 20%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0; /* Invisibles al inicio */
+            transform: translateY(20px); /* Ligeramente desplazados hacia abajo */
+        }
+
+        /* Animación para hacer aparecer las estaciones */
+        @keyframes aparecerEstacion {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilos para los Títulos Principales */
+        .titulo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            /* Animación de "revelado" */
+            clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+            animation: revelarTexto 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        /* Estilos para los Subtítulos (Descripción) */
+        .descripcion {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.4;
+            opacity: 0; /* Invisibles al inicio */
+            transform: scale(0.9);
+            /* Animación de "desvanecimiento y zoom" */
+            animation: desvanecerZoomIn 0.8s ease-out forwards;
+        }
+
+        /* --- POSICIONAMIENTO DE LAS ESTACIONES --- */
+        /* Alternamos arriba y abajo para recrear la forma de onda */
+        .estacion.arriba {
+            margin-bottom: 250px;
+        }
+        
+        .estacion.abajo {
+            margin-top: 250px;
+        }
+
+        /* --- KEYFRAMES DE ANIMACIONES --- */
+        @keyframes dibujarLinea {
+            to { scale: 1 1; }
+        }
+
+        @keyframes revelarTexto {
+            to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        }
+
+        @keyframes desvanecerZoomIn {
+            to {
+                opacity: 0.9; /* Un poco translúcido para elegancia */
+                transform: scale(1);
+            }
+        }
+
+        /* --- RETRASOS EN CASCADA (PARA EL EFECTO SORPRENDENTE) --- */
+        /* La línea se dibuja, y luego cada estación aparece secuencialmente */
+        
+        /* Antigua Grecia */
+        .estacion-1 { animation: aparecerEstacion 0.8s ease-out forwards; animation-delay: 1.2s; }
+        .estacion-1 .titulo { animation-delay: 1.4s; }
+        .estacion-1 .descripcion { animation-delay: 1.8s; }
+
+        /* Edad Media */
+        .estacion-2 { animation: aparecerEstacion 0.8s ease-out forwards; animation-delay: 2.0s; }
+        .estacion-2 .titulo { animation-delay: 2.2s; }
+        .estacion-2 .descripcion { animation-delay: 2.6s; }
+
+        /* Modernidad */
+        .estacion-3 { animation: aparecerEstacion 0.8s ease-out forwards; animation-delay: 2.8s; }
+        .estacion-3 .titulo { animation-delay: 3.0s; }
+        .estacion-3 .descripcion { animation-delay: 3.4s; }
+
+        /* Contemporánea */
+        .estacion-4 { animation: aparecerEstacion 0.8s ease-out forwards; animation-delay: 3.6s; }
+        .estacion-4 .titulo { animation-delay: 3.8s; }
+        .estacion-4 .descripcion { animation-delay: 4.2s; }
+
+    </style>
+</head>
+<body>
+
+    <div class="infografia-container">
+        <div class="linea-camino"></div>
+
+        <div class="estacion estacion-1 arriba">
+            <div class="titulo">Antigua<br>Grecia</div>
+            <div class="descripcion">Sócrates, Platón<br>y Aristóteles</div>
+        </div>
+
+        <div class="estacion estacion-2 abajo">
+            <div class="titulo">Edad Media</div>
+            <div class="descripcion">Ética teológica y<br>escolástica</div>
+        </div>
+
+        <div class="estacion estacion-3 arriba">
+            <div class="titulo">Modernidad</div>
+            <div class="descripcion">Racionalismo<br>moral: Kant</div>
+        </div>
+
+        <div class="estacion estacion-4 abajo">
+            <div class="titulo">Contemporánea</div>
+            <div class="descripcion">Existencialismo y<br>retos del siglo XXI</div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('click', () => {
+            location.reload();
+        });
+    </script>
+</body>
+</html>
