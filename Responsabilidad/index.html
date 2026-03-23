@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsabilidad Médica Legal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00779A;
+            --secondary-color: #e0f2f7;
+            --text-dark: #333;
+            --bg-light: #f4f7f8;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+        }
+
+        .instruction {
+            text-align: center;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .menu-item {
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-header {
+            width: 100%;
+            padding: 20px 30px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            outline: none;
+        }
+
+        .menu-header:hover {
+            background-color: #f9f9f9;
+        }
+
+        .menu-header h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.4s ease;
+            fill: var(--primary-color);
+        }
+
+        .menu-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            background-color: #fafafa;
+        }
+
+        .menu-content.active {
+            max-height: 2000px;
+            transition: max-height 0.5s cubic-bezier(1, 0, 1, 0);
+        }
+
+        .inner-padding {
+            padding: 20px 40px;
+            line-height: 1.6;
+        }
+
+        ul { list-style-type: none; padding-left: 0; }
+        ul li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block; 
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .rotated { transform: rotate(180deg); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Responsabilidad Contractual</h1>
+    </header>
+    
+    <p class="instruction">Haga clic sobre cada panel para ampliar la información.</p>
+
+    <div class="menu-item">
+        <button class="menu-header">
+            <h2>Cuándo aplica</h2>
+            <svg class="icon" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5z"/></svg>
+        </button>
+        <div class="menu-content">
+            <div class="inner-padding">
+                <p>Cuando no existe un contrato previo, como en una atención de emergencia o cuando un familiar reclama por la muerte de un paciente (daño moral).</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-item">
+        <button class="menu-header">
+            <h2>Requisitos</h2>
+            <svg class="icon" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5z"/></svg>
+        </button>
+        <div class="menu-content">
+            <div class="inner-padding">
+                <ul>
+                    <li><strong>Acción u omisión:</strong> del profesional sanitario.</li>
+                    <li><strong>Culpa o negligencia:</strong> es el descuido, la omisión o falta de aplicación en la ejecución de un acto médico. Es la carencia de atención durante el ejercicio médico. La negligencia es sinónimo de descuido y omisión, es la forma pasiva de la imprudencia y comprende el olvido de las precauciones impuestos por la prudencia, cuya observación hubiera prevenido el daño.</li>
+                    <li><strong>Daño:</strong> perjuicio sufrido.</li>
+                    <li><strong>Nexo causal:</strong> relación directa entre la conducta y el daño.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-item">
+        <button class="menu-header">
+            <h2>Mala Praxis</h2>
+            <svg class="icon" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5z"/></svg>
+        </button>
+        <div class="menu-content">
+            <div class="inner-padding">
+                <p>Se encuadra aquí, ya que no se puede pactar contractualmente la exención de responsabilidad por mala praxis (ej. abandono de un paciente) (Cabanellas, 2004).</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-item">
+        <button class="menu-header">
+            <h2>Casos particulares: Daños a terceros</h2>
+            <svg class="icon" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5z"/></svg>
+        </button>
+        <div class="menu-content">
+            <div class="inner-padding">
+                <p>Si un familiar reclama por la muerte del paciente, la vía es extracontractual.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-item">
+        <button class="menu-header">
+            <h2>Casos particulares: Cirugía estética</h2>
+            <svg class="icon" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5z"/></svg>
+        </button>
+        <div class="menu-content">
+            <div class="inner-padding">
+                <p>Puede ser de resultado <strong>(contractual)</strong> si se pacta un resultado específico, o de medios <strong>(contractual/extracontractual)</strong> si no se garantiza un resultado, pero el daño por mala praxis es extracontractual (Mejía, 2024).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const headers = document.querySelectorAll('.menu-header');
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.icon');
+            content.classList.toggle('active');
+            icon.classList.toggle('rotated');
+            headers.forEach(other => {
+                if (other !== header) {
+                    other.nextElementSibling.classList.remove('active');
+                    other.querySelector('.icon').classList.remove('rotated');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
