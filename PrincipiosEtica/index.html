@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principios Éticos del Auditor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0f172a;
+            --accent-blue: #38bdf8;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-blue);
+            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+            color: var(--text-light);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+        }
+
+        .instruction {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        /* Grid Responsivo */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Flip Card Logic */
+        .flip-card {
+            background-color: transparent;
+            height: 320px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        /* Clase activada por JavaScript al hacer clic */
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Estilo sutil de hover sin girar */
+        .flip-card:not(.flipped):hover .flip-card-front {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .flip-card-front {
+            background: var(--card-bg);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .flip-card-front h3 {
+            font-size: 1.4rem;
+            color: var(--accent-blue);
+            border-bottom: 2px solid rgba(56, 189, 248, 0.2);
+            padding-bottom: 15px;
+            width: 80%;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #075985 0%, #0c4a6e 100%);
+            color: white;
+            transform: rotateY(180deg);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: left;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Scrollbar para las tarjetas si el texto es muy largo en móviles */
+        .flip-card-back::-webkit-scrollbar {
+            width: 4px;
+        }
+        .flip-card-back::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .flip-card {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-section">
+        <h1>Principios Éticos del Auditor Médico</h1>
+        <p class="instruction">Haga clic sobre cada tarjeta para ampliar la información</p>
+    </div>
+    
+    <div class="grid-layout">
+        
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Integridad</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>En su ejercicio profesional se espera que actúe íntegramente, esto es, con rectitud, honestidad y sinceridad.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Objetividad</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>Consiste en ser imparcial en sus actuaciones y analizar sin perjuicios los diferentes aspectos objeto de su trabajo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Independencia</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>Debe tener y desarrollar independencia mental y de criterio con respecto a cualquier circunstancia.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Responsabilidad</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>Es un principio fundamental de ética que está implícito en todas las actuaciones del auditor, lo que permite que sus actuaciones sean confiables.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Confidencialidad</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>Se requiere de un compromiso de lealtad del auditor médico con las fuentes de información, por lo cual es necesaria la reserva profesional.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Competencia profesional</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>El auditor médico solo debe comprometerse a realizar trabajos que estén en el campo de su capacidad e idoneidad. Deberá recurrir a otros profesionales en aquellos campos que no sean de su competencia.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Normas técnicas</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>El auditor deberá cumplir su trabajo profesional de acuerdo con sus normas técnicas y profesionales reconocidas y aceptadas. Su trabajo es objetivo y debe contar con instrumentos y documentación que valide su actuación.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Respeto con los colegas</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>Consiste en no afectar negativamente la honra y fama de sus colegas con el fin de sacar provecho de sus actuaciones.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Conducta ética</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>El auditor médico debe abstenerse de realizar actos que atenten contra la profesión; procediendo en todo momento de acuerdo con los más elevados preceptos de la moral universal; actuando siempre en forma legal, digna, y de buena fe; evitando su participación en acciones fraudulentas de cualquier índole.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h3>Respeto a las instituciones y áreas auditadas</h3>
+                </div>
+                <div class="flip-card-back">
+                    <p>El auditor no puede aplicar unas normas ideales sin tener en cuenta las circunstancias de operación del personal o de la institución que audita. Por lo tanto, debe tener en cuenta casos de orden estructural, organizativo, académico, financiero, tecnológico, entre otros, con el fin de que sus análisis sean objetivos.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Función para alternar la clase 'flipped' al hacer clic
+    function flipCard(card) {
+        card.classList.toggle('flipped');
+    }
+</script>
+
+</body>
+</html>
