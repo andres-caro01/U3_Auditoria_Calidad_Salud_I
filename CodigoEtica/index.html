@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animación de Círculos de Rebote (Sin Líneas)</title>
+    <style>
+        /* Estilos base del documento */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa; /* Fondo gris muy claro */
+            font-family: 'Montserrat', sans-serif; /* Fuente moderna y limpia */
+            overflow: hidden; /* Evita barras de desplazamiento */
+        }
+
+        /* Contenedor principal de la escena */
+        .scene {
+            position: relative;
+            width: 600px;
+            height: 600px;
+        }
+
+        /* Estilo base para todos los círculos */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0; /* Empieza invisible */
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, filter 0.3s ease-out;
+            transform-origin: center center;
+            mix-blend-mode: multiply; /* Efecto de fusión para un aspecto moderno */
+        }
+
+        /* Hover: efecto visual al pasar el ratón */
+        .circle:hover {
+            transform: scale(1.08); /* Crece ligeramente */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            filter: brightness(110%); /* Se aclara un poco */
+        }
+
+        /* Títulos dentro de los círculos */
+        .circle .title {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Colores y Tamaños Específicos (Clonando la imagen original) */
+        
+        /* Círculo 'Definición' (Arriba Izquierda, más grande, azul oscuro) */
+        #circle-definicion {
+            width: 250px;
+            height: 250px;
+            background-color: #036881; /* Azul profundo original */
+            top: 50px;
+            left: 50px;
+            font-size: 24px;
+        }
+
+        /* Círculo 'Contenido' (Arriba Derecha, medio, azul medio) */
+        #circle-contenido {
+            width: 210px;
+            height: 210px;
+            background-color: #0595bb; /* Azul medio original */
+            top: 70px;
+            right: 50px;
+            font-size: 21px;
+        }
+
+        /* Círculo 'Propósito' (Abajo Centro, pequeño, azul brillante) */
+        #circle-proposito {
+            width: 180px;
+            height: 180px;
+            background-color: #02bbfd; /* Azul brillante original */
+            bottom: 50px;
+            left: 210px;
+            font-size: 19px;
+        }
+
+        /* --- KEYFRAMES DE ANIMACIÓN --- */
+
+        /* Animación de "Caída y Rebote ESPECTACULAR" */
+        @keyframes spectacularBounce {
+            0% { 
+                transform: translateY(-800px) scale(0.3) rotate(-30deg); /* Caen de muy arriba */
+                opacity: 0;
+                filter: blur(10px); /* Desenfoque de movimiento */
+            }
+            40% {
+                transform: translateY(30px) scale(1.1) rotate(5deg); /* Rebote por debajo */
+                opacity: 1;
+                filter: blur(0px);
+            }
+            55% {
+                transform: translateY(-15px) scale(0.95) rotate(-2deg); /* Micro rebote arriba */
+            }
+            70% {
+                transform: translateY(5px) scale(1.02) rotate(1deg); /* Micro rebote abajo */
+            }
+            100% { 
+                transform: translateY(0) scale(1) rotate(0); /* Posición final */
+                opacity: 1;
+                filter: blur(0px);
+            }
+        }
+
+        /* --- CLASES ACTIVADORAS --- */
+
+        /* Clase para iniciar la animación de los círculos con la función de rebote personalizada */
+        .animate-circles {
+            animation: spectacularBounce 1.5s cubic-bezier(0.6, -0.28, 0.735, 1.485) forwards;
+        }
+
+        /* Retrasos específicos para el efecto cascada (sin líneas, el inicio es inmediato) */
+        #circle-definicion { animation-delay: 0.1s; }
+        #circle-contenido { animation-delay: 0.4s; }
+        #circle-proposito { animation-delay: 0.7s; }
+
+        /* Botón de reinicio */
+        #reset-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        #reset-btn:hover { opacity: 1; }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="scene" id="main-scene">
+        
+        <div class="circle animate-circles" id="circle-definicion">
+            <span class="title">Definición</span>
+        </div>
+        
+        <div class="circle animate-circles" id="circle-contenido">
+            <span class="title">Contenido</span>
+        </div>
+        
+        <div class="circle animate-circles" id="circle-proposito">
+            <span class="title">Propósito</span>
+        </div>
+    </div>
+
+    <button id="reset-btn">Reiniciar Animación</button>
+
+    <script>
+        // Script simple para reiniciar la animación
+        const resetBtn = document.getElementById('reset-btn');
+        const scene = document.getElementById('main-scene');
+        
+        function resetAnimation() {
+            const circles = document.querySelectorAll('.circle');
+            
+            // Elimina las clases de animación
+            circles.forEach(el => {
+                el.classList.remove('animate-circles');
+            });
+
+            // Fuerza un 'reflow'
+            void scene.offsetWidth;
+
+            // Re-añade las clases
+            setTimeout(() => {
+                circles.forEach(el => el.classList.add('animate-circles'));
+            }, 10);
+        }
+
+        resetBtn.addEventListener('click', resetAnimation);
+    </script>
+</body>
+</html>
