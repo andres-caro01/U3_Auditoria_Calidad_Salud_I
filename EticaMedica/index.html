@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribunales de Ética Médica - Interactivo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0056b3;
+            --dark-blue: #002855;
+            --accent-blue: #00a8ff;
+            --light-blue: #f0f7ff;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 80px 20px 50px 20px; /* Espacio extra arriba para la instrucción */
+            color: #334155;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Instrucción Flotante Superior */
+        .floating-instruction {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 86, 179, 0.9);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            animation: breathe 3s infinite ease-in-out;
+            pointer-events: none;
+            text-align: center;
+            width: fit-content;
+            white-space: nowrap;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+            50% { transform: translateX(-50%) scale(1.05); opacity: 1; }
+        }
+
+        /* Botón de Sección (Acordeón) */
+        .section-trigger {
+            width: 100%;
+            background: var(--primary-blue);
+            color: white;
+            padding: 20px 30px;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+            transition: var(--transition);
+        }
+
+        .section-trigger:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+
+        .section-trigger::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .section-trigger.active::after {
+            transform: rotate(180deg);
+        }
+
+        /* Contenedor de Tarjetas con Animación */
+        .content-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.4s ease;
+            opacity: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .content-wrapper.active {
+            max-height: 2000px; 
+            opacity: 1;
+            padding: 10px 5px 25px 5px;
+        }
+
+        /* Estilo de Tarjetas Internas */
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: var(--transition);
+            opacity: 0; /* Controlado por JS */
+            transform: translateY(20px); /* Controlado por JS */
+        }
+
+        .card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 20px rgba(0, 86, 179, 0.08);
+            background-color: var(--light-blue);
+        }
+
+        .card h3 {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin: 0 0 12px 0;
+            font-weight: 700;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        @media (max-width: 600px) {
+            .section-trigger { font-size: 1.1rem; }
+            .floating-instruction { font-size: 0.8rem; width: 90%; white-space: normal; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="floating-instruction">
+    Haga clic sobre el panel azul para ampliar la información.
+</div>
+
+<div class="container">
+
+    <button class="section-trigger" onclick="toggleSection('sec1', this)">
+        Funciones principales
+    </button>
+    
+    <div id="sec1" class="content-wrapper">
+        <div class="card">
+            <h3>Investigar faltas</h3>
+            <p>conocen de quejas y demandas sobre posibles infracciones a la ética médica.</p>
+        </div>
+        <div class="card">
+            <h3>Juzgar procesos</h3>
+            <p>adelantan los procesos disciplinarios siguiendo los principios del debido proceso.</p>
+        </div>
+        <div class="card">
+            <h3>Aplicar sanciones</h3>
+            <p>imponen sanciones a los médicos que cometen faltas, considerando la gravedad y reincidencia.</p>
+        </div>
+        <div class="card">
+            <h3>Proteger al paciente</h3>
+            <p>aseguran que la atención médica se base en la ética, la moral y las leyes, velando por la vida y la dignidad humana.</p>
+        </div>
+        <div class="card">
+            <h3>Orientar la profesión</h3>
+            <p>buscan que la ética sea una constante en la relación médico-paciente y con las instituciones (Cabanellas, 2004).</p>
+        </div>
+    </div>
+
+    <button class="section-trigger" onclick="toggleSection('sec2', this)">
+        Estructura y funcionamiento
+    </button>
+    
+    <div id="sec2" class="content-wrapper">
+        <div class="card">
+            <h3>Tribunales seccionales</h3>
+            <p><span class="highlight">primera instancia</span>, conocen casos del territorio (departamento, distrito).</p>
+        </div>
+        <div class="card">
+            <h3>Tribunal nacional</h3>
+            <p><span class="highlight">segunda instancia</span>, revisa las decisiones de los seccionales.</p>
+        </div>
+        <div class="card">
+            <h3>Integración</h3>
+            <p>compuestos por médicos idóneos, con reconocida trayectoria y solvencia moral, designados por periodos.</p>
+        </div>
+        <div class="card">
+            <h3>Naturaleza</h3>
+            <p>cumplen función pública, aunque son entidades de derecho privado.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleSection(id, btn) {
+        const content = document.getElementById(id);
+        const isActive = content.classList.contains('active');
+        
+        // Alternar clase activa
+        btn.classList.toggle('active');
+        content.classList.toggle('active');
+
+        const cards = content.querySelectorAll('.card');
+
+        if(!isActive) {
+            // Animación de entrada
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        } else {
+            // Resetear para la próxima apertura
+            cards.forEach(card => {
+                card.style.transition = 'none';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+            });
+        }
+    }
+    
+    // Iniciar con la primera sección abierta
+    window.onload = () => {
+        document.querySelector('.section-trigger').click();
+    };
+</script>
+
+</body>
+</html>
