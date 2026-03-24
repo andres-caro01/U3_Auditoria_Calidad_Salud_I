@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsabilidad Médica - Conceptos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <style>
+        :root {
+            --primary-blue: #007bff;
+            --dark-blue: #003366;
+            --light-blue: #e3f2fd;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(-45deg, #001f3f, #003366, #007bff, #00a8ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        /* Animación de fondo difuminado */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            backdrop-filter: blur(50px);
+            z-index: -1;
+        }
+
+        /* Instrucción flotante */
+        .floating-instruction {
+            position: fixed;
+            bottom: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .swiper {
+            width: 90%;
+            max-width: 900px;
+            height: 550px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .swiper-slide {
+            background: var(--glass);
+            padding: 40px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        h2 {
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            border-left: 5px solid var(--primary-blue);
+            padding-left: 15px;
+        }
+
+        .content-list {
+            list-style: none;
+        }
+
+        .content-list li {
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* Controles */
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary-blue);
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--primary-blue);
+        }
+
+        @media (max-width: 600px) {
+            .swiper-slide { padding: 30px; }
+            h2 { font-size: 1.4rem; }
+            .content-list li { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-instruction">
+        Haga clic sobre las flechas para mas información
+    </div>
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            
+            <div class="swiper-slide">
+                <h2>Conceptos fundamentales (Mejía, 2024)</h2>
+                <ul class="content-list">
+                    <li><strong>-Acto médico:</strong> toda intervención (acción u omisión) del profesional en la relación médico-paciente.</li>
+                    <li><strong>-Defecto en el acto médico:</strong> cuando el acto no cumple con las reglas del arte o la ciencia, causando un daño.</li>
+                    <li><strong>-Lex Artis:</strong> el conjunto de conocimientos, técnicas y cuidados que un profesional debe aplicar en una situación dada.</li>
+                </ul>
+            </div>
+
+            <div class="swiper-slide">
+                <h2>Tipos de faltas (Culpa)</h2>
+                <ul class="content-list">
+                    <li><strong>-Negligencia:</strong> no hacer lo que se debe hacer, o hacer lo que no se debe.</li>
+                    <li><strong>-Impericia:</strong> falta de conocimientos técnicos básicos indispensables.</li>
+                    <li><strong>-Imprudencia:</strong> actuar sin la debida cautela, asumiendo riesgos no justificados.</li>
+                </ul>
+            </div>
+
+            <div class="swiper-slide">
+                <h2>Elementos para establecer la responsabilidad</h2>
+                <ul class="content-list">
+                    <li><strong>-Acto médico (Acción/Omisión):</strong> la conducta del profesional.</li>
+                    <li><strong>-Falta (Violación de la Lex Artis):</strong> incumplimiento de los deberes profesionales.</li>
+                    <li><strong>-Daño:</strong> perjuicio a la salud, patrimonio o moral del paciente (vida, integridad).</li>
+                    <li><strong>-Nexo causal:</strong> vínculo directo entre la falta y el daño, que debe probarse científicamente.</li>
+                </ul>
+            </div>
+
+            <div class="swiper-slide">
+                <h2>Tipos de responsabilidad</h2>
+                <ul class="content-list">
+                    <li><strong>-Civil:</strong> obligación de reparar el daño (indemnización).</li>
+                    <li><strong>-Penal:</strong> cuando hay un delito (más exigente, generalmente requiere dolo o imprudencia grave).</li>
+                    <li><strong>-Administrativa/Disciplinaria:</strong> sanciones impuestas por autoridades (suspensión, multa) (Mejía, 2024).</li>
+                </ul>
+            </div>
+
+            <div class="swiper-slide">
+                <h2>Obligaciones</h2>
+                <ul class="content-list">
+                    <li><strong>-De medios:</strong> el médico se compromete a usar diligentemente sus conocimientos, no a curar.</li>
+                    <li><strong>-De resultado:</strong> excepcionalmente, cuando se pacta un fin concreto (ej. cirugía estética), el médico debe lograrlo o probar una causa extraña.</li>
+                </ul>
+            </div>
+
+            <div class="swiper-slide">
+                <h2>Otros conceptos</h2>
+                <ul class="content-list">
+                    <li><strong>-Consentimiento informado:</strong> esencial para validar el acto médico, especialmente en menores, donde interviene el representante legal.</li>
+                    <li><strong>-Prueba pericial:</strong> fundamental para que jueces entiendan si el acto médico fue adecuado.</li>
+                    <li><strong>-Hecho de la víctima:</strong> puede exonerar totalmente al médico si es causa exclusiva del daño (Cabanellas, 2004).</li>
+                </ul>
+            </div>
+
+        </div>
+        
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            keyboard: true,
+            mousewheel: true,
+        });
+    </script>
+</body>
+</html>
