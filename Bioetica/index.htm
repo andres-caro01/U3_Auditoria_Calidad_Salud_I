@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo Interactivo de Bioética</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #007bff;
+            --dark-blue: #001f3f;
+            --light-blue: #e3f2fd;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top, #003366, #000b1a);
+            color: white;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h1, h2 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--light-blue);
+        }
+
+        /* --- Bento Grid Layout --- */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+        }
+
+        .card h3 {
+            color: var(--primary-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 15px;
+            margin-top: 0;
+        }
+
+        /* --- Secciones Específicas --- */
+        .span-2 { grid-column: span 2; }
+        .span-3 { grid-column: span 3; }
+
+        /* --- Botones e Interactividad --- */
+        .btn-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .btn-item {
+            background: rgba(0, 123, 255, 0.1);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-blue);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-item:hover {
+            background: var(--primary-blue);
+            color: white;
+            padding-left: 25px;
+        }
+
+        .btn-item strong {
+            display: block;
+            font-size: 1.1em;
+        }
+
+        /* --- Principios Fundamentales --- */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .principle-box {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .principle-box:hover {
+            background: var(--light-blue);
+            transform: scale(1.05);
+        }
+
+        .principle-box h4 {
+            margin: 0 0 10px 0;
+            color: var(--dark-blue);
+            font-weight: 600;
+        }
+
+        /* --- Footer/Cita --- */
+        .citation {
+            font-size: 0.8em;
+            text-align: right;
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout { grid-template-columns: 1fr; }
+            .span-2, .span-3 { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 data-aos="fade-down">Módulo de Bioética</h1>
+    
+    <div class="grid-layout">
+        <div class="card" data-aos="fade-right">
+            <h3>Ciencias de la vida y la salud</h3>
+            <p>Dilemas en biomedicina, biotecnología, investigación y atención clínica.</p>
+        </div>
+
+        <div class="card" data-aos="fade-up">
+            <h3>Medio ambiente</h3>
+            <p>La responsabilidad humana con la biodiversidad y la sostenibilidad del planeta.</p>
+        </div>
+
+        <div class="card" data-aos="fade-left">
+            <h3>Comportamiento humano</h3>
+            <p>Valores y principios morales aplicados a la vida en general.</p>
+        </div>
+
+        <div class="card span-2" data-aos="zoom-in">
+            <h2>Para qué sirve</h2>
+            <ul class="btn-list">
+                <li class="btn-item">
+                    <strong>Guía para decisiones:</strong> ayuda a tomar decisiones difíciles en medicina y en el avance científico y tecnológico.
+                </li>
+                <li class="btn-item">
+                    <strong>Diálogo social:</strong> fomenta la participación pública y el debate entre diversas perspectivas.
+                </li>
+                <li class="btn-item">
+                    <strong>Promueve la responsabilidad:</strong> impulsa la conciencia sobre la protección de la vida y el planeta.
+                </li>
+            </ul>
+        </div>
+
+        <div class="card" data-aos="fade-left">
+            <h3>Origen y desarrollo</h3>
+            <p>• Surgió ante la necesidad de regular la investigación y la práctica médica tras eventos históricos.</p>
+            <p>• Se expandió para incluir temas ambientales y sociales, como el cambio climático y la sostenibilidad.</p>
+            <div class="citation">(Blanco, 2022, págs. 210-218).</div>
+        </div>
+
+        <div class="card span-3" data-aos="fade-up">
+            <h2>Principios fundamentales</h2>
+            <div class="principles-grid">
+                <div class="principle-box">
+                    <h4>Autonomía</h4>
+                    <p>Respetar el derecho de las personas a decidir sobre sí mismas, según sus valores.</p>
+                </div>
+                <div class="principle-box">
+                    <h4>No maleficencia</h4>
+                    <p>El deber de no causar daño.</p>
+                </div>
+                <div class="principle-box">
+                    <h4>Beneficencia</h4>
+                    <p>Buscar el bien y el bienestar de los demás, especialmente en salud.</p>
+                </div>
+                <div class="principle-box">
+                    <h4>Justicia</h4>
+                    <p>Distribuir equitativamente los recursos y asegurar el trato igualitario.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+</script>
+
+</body>
+</html>
