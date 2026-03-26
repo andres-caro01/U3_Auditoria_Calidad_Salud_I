@@ -59,9 +59,8 @@
             box-shadow: 0 0 20px var(--neon-glow);
         }
 
-        /* Estilos específicos para los iconos */
         .card-icon {
-            font-size: 4rem; /* Icono grande */
+            font-size: 4rem;
             color: var(--neon-blue);
             margin-bottom: 25px;
             transition: all 0.3s ease;
@@ -69,7 +68,7 @@
         }
 
         .card:hover .card-icon {
-            transform: scale(1.1); /* Efecto pop al hover */
+            transform: scale(1.1);
             filter: drop-shadow(0 0 15px var(--neon-blue));
         }
 
@@ -81,7 +80,6 @@
             font-size: 1.1rem;
         }
 
-        /* Modal Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -130,7 +128,7 @@
         .modal-body p {
             line-height: 1.8;
             font-size: 1.05rem;
-            text-align: justify;
+            text-align: left; /* Cambio de justify a left */
             color: var(--text-color);
         }
 
@@ -178,10 +176,8 @@
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // Inicializar animaciones de entrada
     AOS.init({ duration: 1000, once: true });
 
-    // Datos íntegros de la imagen
     const data = {
         'normas-juridicas': {
             title: 'Normas jurídicas',
@@ -211,7 +207,6 @@
         document.getElementById('modalOverlay').style.display = 'none';
     }
 
-    // Cerrar modal con tecla ESC
     document.addEventListener('keydown', function(event) {
         if (event.key === "Escape") {
             closeModal();
