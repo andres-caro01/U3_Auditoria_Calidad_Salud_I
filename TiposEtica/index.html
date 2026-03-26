@@ -27,15 +27,17 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            /* CAMBIO: Estas dos líneas centran todo vertical y horizontalmente */
             align-items: center;
-            padding: 4rem 2rem;
+            justify-content: center;
+            padding: 2rem; /* Reducido un poco para evitar desbordes en pantallas pequeñas */
         }
 
         h1 {
             text-align: center;
             max-width: 800px;
             font-size: 2.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
             line-height: 1.2;
             background: linear-gradient(to bottom, #fff, #a1a1aa);
@@ -45,9 +47,10 @@
 
         .subtitle {
             color: var(--text-gray);
-            margin-bottom: 4rem;
+            margin-bottom: 3rem; /* Ajustado para que quepa mejor en el centro */
             font-size: 1.1rem;
             font-weight: 300;
+            text-align: center;
         }
 
         /* Contenedor Grid Responsivo */
@@ -57,6 +60,8 @@
             gap: 1.5rem;
             width: 100%;
             max-width: 1200px;
+            /* CAMBIO: Asegura que el contenido del grid se agrupe al centro */
+            justify-content: center;
         }
 
         /* Estilo de las 7 Tarjetas-Botones */
@@ -187,7 +192,7 @@
 
         /* Media Queries para ajuste fino en móviles */
         @media (max-width: 600px) {
-            body { padding: 2rem 1rem; }
+            body { padding: 2rem 1rem; justify-content: flex-start; } /* Evita problemas en pantallas muy pequeñas */
             h1 { font-size: 1.8rem; }
             .modal-content { padding: 2rem; border-radius: 20px; }
             .modal-body h2 { font-size: 1.5rem; }
@@ -246,7 +251,6 @@
     </div>
 
     <script>
-        // Base de datos con la información EXACTA proporcionada
         const dataetica = {
             profesional: {
                 title: "Ética profesional",
@@ -285,22 +289,20 @@
             const item = dataetica[key];
             contentArea.innerHTML = `<h2>${item.title}</h2><p>${item.text}</p>`;
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Deshabilitar scroll del fondo
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeModal() {
             modal.style.display = 'none';
-            document.body.style.overflow = ''; // Restaurar scroll
+            document.body.style.overflow = ''; 
         }
 
-        // Cerrar si se hace clic fuera del contenido blanco
         window.onclick = function(event) {
             if (event.target == modal) {
                 closeModal();
             }
         }
 
-        // Cerrar con la tecla Escape
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape" && modal.style.display === 'flex') {
                 closeModal();
